@@ -1,0 +1,141 @@
+<!--
+  Generated template for the CourseDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{course.beginHour | date: "dd.MM.yyyy"}} - {{course.studentName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="beginDateFormat" (ionChange) = "updateEndDate()"></ion-datetime>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label stacked>Début</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="beginDateFormat" (ionChange) = "updateDifference()" max="{{endDateFormat}}"></ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label stacked>Fin</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="endDateFormat" (ionChange) = "updateDifference()" min="{{beginDateFormat}}"></ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label stacked>Durée</ion-label>
+          <ion-datetime disabled  displayFormat="HH:mm" [(ngModel)]="difference"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-list>
+
+    <ion-list-header>
+    </ion-list-header>
+
+    <ion-item no-lines>
+      <ion-label stacked>Theme</ion-label>
+      <ion-textarea placeholder="Enter a description" [(ngModel)]="course.theme"></ion-textarea>
+
+    </ion-item>
+
+    <ion-item no-lines>
+      <ion-label stacked>Objectif</ion-label>
+      <ion-textarea placeholder="Enter a description" [(ngModel)]="course.objectif"></ion-textarea>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label>Objectif non atteint</ion-label>
+          <ion-checkbox id="obj_non_atteint"[checked]="this.course.objectif_status=='NonAtteint'" [(ngModel)]="obj_non_atteint" (ionChange)="updateObjectifStatus($event)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+      <ion-label>Objectif partiellement atteint</ion-label>
+      <ion-checkbox id="obj_partiel" [checked]="this.course.objectif_status=='Partiellement'" [(ngModel)]="obj_partiel" (ionChange)="updateObjectifStatus($event)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label>Objectif atteint</ion-label>
+          <ion-checkbox id="obj_atteint" [checked]="this.course.objectif_status=='Atteint'" [(ngModel)]="obj_atteint" (ionChange)="updateObjectifStatus($event)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+
+    </ion-list-header>
+    <ion-item no-lines>
+      <ion-label stacked><ion-icon name="compass"></ion-icon> Parcours</ion-label>
+      <ion-textarea placeholder="Enter a description" [(ngModel)]="course.parcours"></ion-textarea>
+    </ion-item>
+
+    <ion-item no-lines>
+      <ion-label stacked>Remarques</ion-label>
+      <ion-textarea placeholder="Enter a description" [(ngModel)]="course.remarque"></ion-textarea>
+    </ion-item>
+
+    <ion-item no-lines>
+      <ion-label stacked>Sujet de la prochaine leçon</ion-label>
+      <ion-textarea placeholder="Enter a description" [(ngModel)]="course.nextCourse"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+
+    <ion-card>
+      <ion-card-header>
+        Capacités Techniques
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item no-lines *ngFor="let capability of capabilityTech" >
+          {{capability.type}}
+          <div item-content>
+            <rating rating="{{capability.value}}" (update)="changeRatingValue(capability, $event)"></rating>
+          </div>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Capacités Routières
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item no-lines *ngFor="let capability of capabilityRoad" >
+          {{capability.type}}
+          <div item-content>
+            <rating rating="{{capability.value}}" (update)="changeRatingValue(capability, $event)"></rating>
+          </div>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+
+
+  <ion-buttons end>
+    <button start ion-button (click)="save()">Save</button>
+    <button ion-button (click)="closeModal()">Close</button>
+  </ion-buttons>
+
+</ion-content>

@@ -1,0 +1,41 @@
+
+    <ion-content scroll="false">
+
+        <div class = "col header text-center">
+          <img style="height:20vh" src="./assets/imgs/icon.png" class = "logo" />
+        </div>
+
+        <ion-card *ngIf="userProfile != null">
+          <ion-card-content>
+            <ion-avatar>
+              <img src="{{userProfile.photoURL}}">
+            </ion-avatar>
+            {{userProfile.displayName}} <br/>
+            {{userProfile.email}} <br/>
+            Dernière conexion: {{userProfile.lastLoginAt | date: 'dd.MM.yyyy - HH:mm'}}
+          </ion-card-content>
+
+        </ion-card>
+
+        <ion-row>
+          <ion-col text-center>
+            <div *ngIf="userProfile == null">
+              <button ion-button large item-end color="danger" (click)="googleLogin()">
+                Connexion avec Google
+              </button>
+            </div>
+            <div *ngIf="userProfile != null">
+              <button ion-button large item-end color="dark" (click)="doGoogleLogout()">
+                Deconnexion
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      <ion-row>
+        <ion-col text-center>
+          Version: {{version}}
+        </ion-col>
+      </ion-row>
+
+</ion-content>

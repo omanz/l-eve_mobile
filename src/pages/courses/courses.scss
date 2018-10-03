@@ -1,0 +1,21 @@
+page-courses {
+  .spinner-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  ion-searchbar{
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+  transition: width 2s;
+
+  }
+
+  ion-searchbar.baba {
+    display:block;
+  }
+
+  ion-buttons.searchbar{
+    width: calc(100% - 100px);
+  }
+}

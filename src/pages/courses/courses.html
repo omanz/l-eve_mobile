@@ -1,0 +1,84 @@
+<!--
+  Generated template for the CoursesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cours {{localData}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="download"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <script id="my-popover.html" type="text/ng-template">
+    <ion-popover-view>
+      <ion-header-bar>
+        <h1 class="title">My Popover Title</h1>
+      </ion-header-bar>
+      <ion-content>
+        Hello!
+      </ion-content>
+    </ion-popover-view>
+  </script>
+
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-card>
+    <ion-list>
+      <button ion-item>
+        <ion-icon name="calendar" item-start (click)="openCalendar()"></ion-icon>
+        {{period.from | date: 'dd.MM.yyyy' }} - {{period.to | date: 'dd.MM.yyyy' }}
+      </button>
+
+      <button ion-item>
+        <ion-icon name="search" item-start></ion-icon>
+        <ion-input clearInput [formControl]="searchControl" [(ngModel)]="searchTerm" value="{{searchTerm}}"></ion-input>
+
+      </button>
+
+      <button ion-item>
+        <ion-icon name="clock" item-start></ion-icon>
+        {{getHourSring()}}
+      </button>
+
+    </ion-list>
+  </ion-card>
+
+
+
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let item of (coursesFiltered)?.slice().reverse()" >
+      <button ion-item clear (click)="openItem(item)">
+        <i>{{item.beginHour  | date: 'dd.MM.yyyy - HH:mm' }}</i> &emsp; {{item.studentName }}
+        <ion-icon  small item-right *ngIf="(item.remarque == null || item.remarque.length <= 0) && (item.parcours == null || item.parcours.length <= 0)" item-end name="ios-create-outline"></ion-icon>
+      </button>
+
+      <ion-item-options icon-start side="left">
+        <button color="danger" ion-button (click)="deleteItem(item.key)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

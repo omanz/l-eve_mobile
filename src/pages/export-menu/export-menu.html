@@ -1,0 +1,30 @@
+<ion-list>
+  <!--button ion-button (click)="closeModal()">
+  <ion-list-header color="danger">Export</ion-list-header>
+  </button-->
+  <ion-list-header color="primary">Export
+    <button ion-button icon-only item-right (click)='close()' clear>
+      <ion-icon color='light' name="close" ></ion-icon>
+    </button>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Résumé</ion-label>
+    <ion-checkbox [(ngModel)]="checkboxresume"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cours</ion-label>
+    <ion-checkbox [(ngModel)]="checkboxcours"></ion-checkbox>
+  </ion-item>
+
+  <!--ion-item>
+    <ion-label>CSV</ion-label>
+    <ion-checkbox [(ngModel)]="checkboxcsv"></ion-checkbox>
+  </ion-item-->
+
+  <ion-buttons end>
+    <button ion-button (click)="export()">Export</button>
+  </ion-buttons>
+
+</ion-list>

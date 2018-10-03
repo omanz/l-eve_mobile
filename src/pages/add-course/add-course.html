@@ -1,0 +1,53 @@
+<!--
+  Generated template for the ModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ajouter un cours</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Eleve</ion-label>
+      <ion-select [(ngModel)]="studentSelected">
+        <ion-option *ngFor="let student of students$ | async" [value]="student">
+          {{ student.first_name }} {{ student.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-datetime [(ngModel)]="beginDateFormat" displayFormat="DD/MM/YYYY" (ionChange) = "updateEndDate()"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Heure début</ion-label>
+      <ion-datetime [(ngModel)]="beginDateFormat" displayFormat="HH:mm"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Heure fin</ion-label>
+      <ion-datetime [(ngModel)]="endDateFormat" displayFormat="HH:mm" min="{{beginDateFormat}}"></ion-datetime>
+    </ion-item>
+
+  </ion-list>
+
+
+
+  <ion-buttons end>
+    <button start ion-button [disabled]="!studentSelected" (click)="save(studentSelected.key)">Save</button>
+    <button ion-button (click)="closeModal()">Close</button>
+  </ion-buttons>
+
+</ion-content>
